@@ -1,0 +1,34 @@
+<!-- templates/liste_taches.html -->
+{% extends 'base.html' %}
+
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+  {% load static %}
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row justify-center align-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-content">
+              <h2 class="center-align mb-4 pb-2 pb-md-0 mb-md-5">Liste des tâches autorisées</h2>
+              {% for tache in taches %}
+                <div class="row">
+                  <div class="col s12">
+                    <h3 class="center-align mb-4 pb-2">Tâche {{ forloop.counter }} {{ tache.titre }}</h3>
+                    <p class="flow-text"><strong>Étudiant :</strong> {{ tache.etudiant.nom }}</p>
+                    <p class="flow-text"><strong>Matière :</strong> {{ tache.matiere }}</p>
+                    <p class="flow-text"><strong>Statut :</strong> {{ tache.statut }}</p>
+                    <div class="col s6">
+                      <!-- Afficher d'autres informations sur la tâche -->
+                      <a class="btn waves-effect waves-light" href="{{ tache.fichier.url }}" download>Télécharger la tâche</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

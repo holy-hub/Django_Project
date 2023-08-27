@@ -1,0 +1,32 @@
+<!-- autorisation_note.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title}} {% endblock title %}
+{% block content %}
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row justify-center align-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-content">
+                            <h2 class="center-align">Autoriser et Noter Soumission</h2>
+
+                            <p class="flow-text">Titre du cours: {{ soumission.cours.titre }}</p>
+                            <p class="flow-text">Titre de la soumission: {{ soumission.titre }}</p>
+                            <!-- Ajouter un lien de téléchargement vers le fichier -->
+                            <p><a class="btn waves-effect waves-light" href="{{ soumission.fichier.url }}" download>Télécharger le fichier à noter</a></p>
+
+                            <form method="post" class="row">
+                                {% csrf_token %}
+                                <div class="input-field col s12">
+                                    {{ form.as_p }}
+                                </div>
+                                <button class="btn waves-effect waves-light" type="submit">Enregistrer la note</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

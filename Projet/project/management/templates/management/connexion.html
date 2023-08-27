@@ -1,0 +1,40 @@
+<!-- templates/connexion.html -->
+{% extends 'base.html' %}
+
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+  {% load static %}
+  {% if message %} <h3>{{ message }}</h3> {% endif %}
+
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row justify-center align-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-content">
+              <h2 class="center-align">Login</h2>
+              <form>
+                <div class="input-field">
+                  <input type="text" id="nom" placeholder="Entrez votre nom">
+                  <label for="nom">Nom :</label>
+                </div>
+                <div class="input-field">
+                  <input type="email" id="email" placeholder="Entrez votre email">
+                  <label for="email">Email :</label>
+                </div>
+                <div class="row justify-around mt-4 pt-2">
+                  <div class="col s6">
+                    <a href="{% url 'app_signup' %}" class="btn waves-effect waves-light" type="button">need an account</a>
+                  </div>
+                  <div class="col s6">
+                    <button class="btn waves-effect waves-light" type="submit">Envoyer</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title}} {% endblock title %}
+{% block content %}
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row justify-center align-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-content">
+              <h2 class="center-align mb-2">Soumettre un travail pour "{{ cours.titre }}"</h2>
+              <form method="post" class="row" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="input-field col s12">
+                    {{ form.as_p }}
+                  </div>
+                </div>
+                <div class="row justify-center mt-4 pt-2">
+                  <div class="col s6">
+                    <button type="submit">Soumettre</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

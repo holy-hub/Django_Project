@@ -1,0 +1,45 @@
+<!-- Template pour la mise à jour du profil -->
+{% extends 'base.html' %}
+
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+    {% load static %}
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row justify-center align-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-content">
+                            <h2 class="center-align mb-4 pb-2 pb-md-0 mb-md-5">Profil de l'utilisateur</h2>
+                            {% if mise_a_jour_reussie %}
+                                <div class="row">
+                                    <div class="col s12">
+                                        <p class="flow-text">Votre profil a été mis à jour avec succès.</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <form method="POST" class="row" action="{% url 'app_update_profil' %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="input-field col-md-6 mb-4">
+                                        <input type="text" name="nom" value="{{ utilisateur.nom }}">
+                                        <label for="nom">Nom: </label>
+                                    </div>
+                                    <div class="input-field col-md-6 mb-4">
+                                        <input type="text" name="prenom" value="{{ utilisateur.prenom }}">
+                                        <label for="prenom">Prénom: </label>
+                                    </div>
+                                </div>
+
+                            <!-- Ajoutez d'autres champs de profil ici -->
+                                <div class="col s6">
+                                    <button class="btn waves-effect waves-light" type="submit">Mettre à jour</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!-- Template pour la liste des tâches archivées -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title}} {% endblock title %}
+{% block content %}
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row justify-center align-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-content">
+                            <h2 class="center-align">Liste des tâches archivées</h2>
+                            <ul class="collection with-header">
+                                <li class="collection-header center-align"> ARCHIVES </li>
+                                {% for tache in taches_archivees %}
+                                    <li class="collection-item">{{ tache.titre }} - <a href="{% url 'app_telecharger_fichier' tache.id %}">Télécharger le fichier</a></li>
+                                {% empty %}
+                                    <li class="collection-item">Aucune tâche archivée disponible.</li>
+                                {% endfor %}
+                                <li class="collection-footer"> - </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

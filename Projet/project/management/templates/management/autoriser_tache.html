@@ -1,0 +1,62 @@
+<!-- templates/autoriser_tache.html -->
+{% extends 'base.html' %}
+
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+  {% load static %}
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row justify-center align-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-content">
+              <h3 class="center-align mb-4 pb-2 pb-md-0 mb-md-5">TASK</h3>
+              <form method="post" class="row" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                  <label for="etudiant">Étudiant :</label>
+                  <div class="input-field">
+                    <select class="validate browser-default" name="etudiant" required>
+                      {% for etudiant1 in etudiants %}
+                        <option value="{{ etudiant1.id }}">{{ etudiant1.nom }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col-md-6 mb-4">
+                    <input type="text" name="titre" required>
+                    <label for="titre">Intitulé du projet :</label>
+                  </div>
+                  <div class="input-field col-md-6 mb-4">
+                    <input type="text" name="matiere" required>
+                    <label for="matiere">Matière :</label>
+                  </div>
+                </div>
+
+                <div class="input-field mb-4">
+                  <label for="fichier">Fichier :</label>
+                  <input type="file" name="fichier" required>
+                </div>
+
+                <div class="row">
+                  <label for="statut">Statut :</label>
+                  <div class="input-field">
+                    <select class="validate browser-default" name="statut" required>
+                      <option value="en_cours">En cours</option>
+                      <option value="soumis">Soumis</option>
+                      <option value="corrigé">Corrigé</option>
+                      <option value="traité">Traité</option>
+                      <option value="archivé">Archivé</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit">Autoriser la tâche</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

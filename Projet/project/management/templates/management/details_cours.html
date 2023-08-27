@@ -1,0 +1,36 @@
+<!-- Template pour les détails d'un cours -->
+{% extends 'base.html' %}
+
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+    {% load static %}
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row justify-center align-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-content">
+                            <h2 class="center-align">Détails du cours "{{ cours.titre }}"</h2>
+                            <p class="flow-text">{{ cours.description }}</p>
+                            <p class="flow-text">Enseignant responsable : {{ cours.enseignant.nom }}</p>
+                            <!-- Affichez d'autres détails du cours -->
+                            <p class="flow-text">Étudiant : {{ cours.etudiant }}</p>
+                            <p class="flow-text">Date de début : {{ cours.date_debut }}</p>
+                            <p class="flow-text">Date de fin : {{ cours.date_fin }}</p>
+
+                            {% if user.is_authenticated and user == cours.etudiant %}
+                                <div class="row justify-around mt-4 pt-2">
+                                    <div class="col s6">
+                                        <a class="btn waves-effect waves-light" href="{% url 'app_soumettre_travail' cours.id %}">Soumettre mon travail</a>
+                                    </div>
+                                    <div class="col s6">
+                                        <a class="btn waves-effect waves-light" href="{% url 'app_update_profil' %}" class="btn btn-primary">Mettre à jour mon profil</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title}} {% endblock title %}
+{% block content %}
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row justify-center align-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-content">
+                            <h2 class="center-align">Liste des cours en cours</h2>
+                            <ul class="collection with-header">
+                                <li class="collection-header">Cours - Enseignant</li>
+                                {% for cours in cours_en_cours %}
+                                    <li class="collection-item">
+                                        {{ cours.titre }} - Enseignant : {{ cours.enseignant.nom }}
+                                        {% if utilisateur.is_authenticated and utilisateur.role == 'enseignant' %}
+                                            <a href="{% url 'app_update_profil' %}" class="btn waves-effect waves-light">Mettre à jour mon profil</a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                                <li class="collection-footer"> - </li>
+                            </ul>
+
+                            <ul class="collection with-header">
+                                <li class="collection-header">Cours soumis</li>
+                                {% for cours in cours_en_cours %}
+                                    <li class="collection-item"><a href="{% url 'app_details_cours' cours.id %}">{{ cours.titre }}</a></li>
+                                    <ul>
+                                        {% for soumission in cours.soumission_set.all %}
+                                            {% if utilisateur.is_authenticated and utilisateur.role == 'enseignant' %}
+                                                <li class="collection-item">
+                                                    <a href="{% url 'app_autoriser_et_noter_soumission' soumission.id %}">Autoriser et Noter Soumission</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% empty %}
+                                    <li class="collection-item">Aucun cours en cours.</li>
+                                {% endfor %}
+                                <li class="collection-header"> - </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
